@@ -17,4 +17,9 @@ class Image360(models.Model):
     )
 
 
+class Unpack3dModel(models.Model):
+    class Meta:
+        managed = False
+
+
 

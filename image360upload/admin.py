@@ -59,31 +59,6 @@ class DummyModel(models.Model):
 #     # return render(request, template_name='admin/unpack3dmodels.html')
 
 
-# @admin.register(Unpack3dModel)
-# class DummyModelAdmin(admin.ModelAdmin):
-#     def get_urls(self):
-#         # view_name = '{}_{}_changelist'.format(
-#         #     self.model._meta.app_label, self.model._meta.model_name)
-#         # # view_name = 'Upload 3d models'
-#         # return [
-#         #     path('', self.my_view, name=view_name),
-#         # ]
-#         urls = super().get_urls()
-#         my_urls = [
-#             path('', self.admin_site.admin_view(self.my_view)),
-#         ]
-#         return my_urls + urls
-#
-#     def my_view(self, request):
-#         # ...
-#         context = dict(
-#             # Include common variables for rendering the admin template.
-#             self.admin_site.each_context(request),
-#             # Anything else you want in the context...
-#             # opts=Unpack3dModel._meta,
-#         )
-#         return TemplateResponse(request, "admin/sometemplate.html", context)
-
 @admin.register(Unpack3dModel)
 class DummyModelAdmin(admin.ModelAdmin):
     def get_urls(self):
@@ -94,32 +69,57 @@ class DummyModelAdmin(admin.ModelAdmin):
         #     path('', self.my_view, name=view_name),
         # ]
         urls = super().get_urls()
-        opts = self.model._meta
-        # context = dict(
-        #     # Include common variables for rendering the admin template.
-        #     self.admin_site.each_context(self.get_request()),
-        #     # Anything else you want in the context...
-        #     # opts=Unpack3dModel._meta,
-        # )
-        # print(self.get_request())
         my_urls = [
             path('', self.admin_site.admin_view(self.my_view)),
         ]
         return my_urls + urls
 
-
     def my_view(self, request):
         # ...
-        # cl = self.get_changelist_instance(request)
         context = dict(
             # Include common variables for rendering the admin template.
             self.admin_site.each_context(request),
             # Anything else you want in the context...
             opts=self.model._meta,
-
         )
-        print(self.model._meta.app_label)
-        return TemplateResponse(request, "admin/sometemplate.html", context)
+        return TemplateResponse(request, "admin/unpack3dmodels.html", context)
+
+# @admin.register(Unpack3dModel)
+# class DummyModelAdmin(admin.ModelAdmin):
+#     def get_urls(self):
+#         # view_name = '{}_{}_changelist'.format(
+#         #     self.model._meta.app_label, self.model._meta.model_name)
+#         # # view_name = 'Upload 3d models'
+#         # return [
+#         #     path('', self.my_view, name=view_name),
+#         # ]
+#         urls = super().get_urls()
+#         opts = self.model._meta
+#         # context = dict(
+#         #     # Include common variables for rendering the admin template.
+#         #     self.admin_site.each_context(self.get_request()),
+#         #     # Anything else you want in the context...
+#         #     # opts=Unpack3dModel._meta,
+#         # )
+#         # print(self.get_request())
+#         my_urls = [
+#             path('', self.admin_site.admin_view(self.my_view)),
+#         ]
+#         return my_urls + urls
+#
+#
+#     def my_view(self, request):
+#         # ...
+#         # cl = self.get_changelist_instance(request)
+#         context = dict(
+#             # Include common variables for rendering the admin template.
+#             self.admin_site.each_context(request),
+#             # Anything else you want in the context...
+#             opts=self.model._meta,
+#
+#         )
+#         print(self.model._meta.app_label)
+#         return TemplateResponse(request, "admin/sometemplate.html", context)
 
 
 

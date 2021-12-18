@@ -109,7 +109,13 @@ ENV/
 
 .DS_Store
 *.sqlite3
-media/
+
+# ingnore all files in media except media/3d_models/Components
+media/*
+!media/3d_models/
+media/3d_models/*
+!media/3d_models/Components/
+
 *.pyc
 *.db
 *.pid

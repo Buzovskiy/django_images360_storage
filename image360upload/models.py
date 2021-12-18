@@ -20,6 +20,9 @@ class Image360(models.Model):
 class Unpack3dModel(models.Model):
     class Meta:
         managed = False
+        verbose_name = _('Unpack 3d model')
+        verbose_name_plural = _('Unpack 3d models')
+
 
 
 

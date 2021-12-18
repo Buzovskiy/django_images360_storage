@@ -1,0 +1,45 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-18 09:08+0200\n"
+"PO-Revision-Date: 2021-12-18 09:09+0000\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\image360upload\apps.py:8
+#| msgid "Image 360 path"
+msgid "Image 360 upload"
+msgstr "Выгрузка 3d моделей"
+
+#: .\image360upload\models.py:7
+msgid "Product vendor code"
+msgstr "Артикул товара"
+
+#: .\image360upload\models.py:13
+msgid "Image 360 path"
+msgstr "Путь к 3d модели"
+
+#: .\image360upload\models.py:23
+msgid "Unpack 3d model"
+msgstr "Распаковать 3d модель"
+
+#: .\image360upload\models.py:24
+msgid "Unpack 3d models"
+msgstr "Распаковать 3d модели"
+
+#: .\image360upload\templates\admin\unpack3dmodels.html:6
+msgid "Home"
+msgstr ""

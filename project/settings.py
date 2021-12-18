@@ -33,12 +33,12 @@ ALLOWED_HOSTS = decouple.config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    # 'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rosetta',
     'image360upload',
 ]
 
@@ -132,3 +132,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOCALE_PATHS = (
+    BASE_DIR / 'locale',
+)
+
+ROSETTA_MESSAGES_PER_PAGE = 1000
+ROSETTA_SHOW_AT_ADMIN_PANEL = True

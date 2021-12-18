@@ -14,9 +14,10 @@
     <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
         <div class="changelist-form-container">
             <a href="https://weestep.com.ua">weestep.com.ua</a>
-            {{ cl.opts.app_config.verbose_name }}
-            <form action="">
-                <input type="submit">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Submit">
             </form>
         </div>
     </div>

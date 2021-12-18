@@ -1,0 +1,14 @@
+asgiref==3.4.1
+certifi==2021.10.8
+charset-normalizer==2.0.9
+Django==4.0
+django-rosetta==0.9.8
+idna==3.3
+Pillow==8.4.0
+polib==1.1.1
+psycopg2==2.9.2
+python-decouple==3.5
+requests==2.26.0
+sqlparse==0.4.2
+tzdata==2021.5
+urllib3==1.26.7

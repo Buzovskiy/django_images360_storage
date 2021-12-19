@@ -24,5 +24,9 @@ class Unpack3dModel(models.Model):
         verbose_name_plural = _('Unpack 3d models')
 
 
+class Model3dArchive(models.Model):
+    archive = models.FileField(upload_to='3d_models/archives/imported/')
+
+
 
 

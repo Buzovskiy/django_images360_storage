@@ -7,11 +7,32 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import path
 from django.db import models
-from .models import Unpack3dModel, Image360
+from .models import Unpack3dModel, Image360, Model3dArchive
 from django.shortcuts import render
 from django.contrib.admin import AdminSite
 from django.views.generic import TemplateView
 from django import forms
+from django.utils.translation import gettext_lazy as _
+
+
+@admin.register(Model3dArchive)
+class Model3dArchiveAdmin(admin.ModelAdmin):
+    actions = ['unpack_archives']
+
+    @admin.action(description=_('Unpack archives'))
+    def unpack_archives(self, request, queryset):
+        print('hello')
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('import-archives/', self.process_import, name="import_archives"),
+        ]
+        return my_urls + urls
+
+    def process_import(self, request):
+
+        return HttpResponseRedirect("../")
 
 
 class Unpack3dForm(forms.Form):

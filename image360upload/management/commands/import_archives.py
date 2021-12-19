@@ -9,7 +9,9 @@ from pathlib import Path
 import zipfile
 import shutil
 from PIL import Image
-from image360upload.models import Unpack3dModel
+from image360upload.models import Model3dArchive
+from django.core.files import File
+from django.core.files.base import ContentFile
 
 
 class Command(BaseCommand):
@@ -20,16 +22,29 @@ class Command(BaseCommand):
         super(Command, self).__init__()
         Path(self.path_3d_models).mkdir(parents=True, exist_ok=True)
 
-    def import_archives(self, *args, **options):
-        files = [f for f in os.listdir(Path(self.path_3d_models / 'archives'))
+    def handle(self, *args, **options):
+        files = [f for f in os.listdir(Path(self.path_3d_models / 'archives/uploaded'))
                  if re.search(r'.*\.zip$', f, re.IGNORECASE)]
-        print(files)
-        # if not len(files):
-        #     return False
-        #
-        # for file in files:
-        #     dir_model_name = os.path.splitext(os.path.basename(Path(self.root_path_3d) / file))[0]
-        #     with open(Path(self.root_path_3d), 'w') as f:
+
+        if not len(files):
+            return False
+
+        for file in files:
+            # dir_model_name = os.path.splitext(os.path.basename(Path(self.root_path_3d) / file))[0]
+            path_to_archive_uploaded_file = self.path_3d_models / 'archives/uploaded' / file
+            with open(Path(path_to_archive_uploaded_file), 'rb') as fh:
+
+                with ContentFile(fh.read()) as file_content:
+                    # Set the media attribute of the article, but under an other path/filename
+                    model_archive = Model3dArchive()
+                    model_archive.archive.save(f'archives/imported/{file}', file_content)
+                    # Save the article
+                    model_archive.save()
+
+
+                # django_archive = File(f)
+                # model_archive = Model3dArchive()
+                # # model_archive.archive.save('3d_models/archives/new/R107850020.zip', django_archive)
 
 
 

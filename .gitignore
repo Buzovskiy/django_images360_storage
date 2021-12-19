@@ -112,9 +112,29 @@ ENV/
 
 # ingnore all files in media except media/3d_models/Components
 media/*
-!media/3d_models/
+!media/
+!media/.gitkeep
+
 media/3d_models/*
-!media/3d_models/Components/
+!media/3d_models/
+!media/3d_models/.gitkeep
+!media/3d_models/Components
+
+media/3d_models/models/*
+!media/3d_models/models/
+!media/3d_models/models/.gitkeep
+
+media/3d_models/archives/*
+!media/3d_models/archives/
+!media/3d_models/archives/.gitkeep
+
+media/3d_models/archives/imported/*
+!media/3d_models/archives/imported/
+!media/3d_models/archives/imported/.gitkeep
+
+media/3d_models/archives/uploaded/*
+!media/3d_models/archives/uploaded/
+!media/3d_models/archives/uploaded/.gitkeep
 
 *.pyc
 *.db

@@ -33,11 +33,10 @@ class Command(BaseCommand):
             # dir_model_name = os.path.splitext(os.path.basename(Path(self.root_path_3d) / file))[0]
             path_to_archive_uploaded_file = self.path_3d_models / 'archives/uploaded' / file
             with open(Path(path_to_archive_uploaded_file), 'rb') as fh:
-
                 with ContentFile(fh.read()) as file_content:
                     # Set the media attribute of the article, but under an other path/filename
                     model_archive = Model3dArchive()
-                    model_archive.archive.save(f'archives/imported/{file}', file_content)
+                    model_archive.archive.save(file, file_content)
                     # Save the article
                     model_archive.save()
 

@@ -13,11 +13,22 @@ from django.contrib.admin import AdminSite
 from django.views.generic import TemplateView
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.template.defaultfilters import filesizeformat
+from .management.commands import import_archives
 
 
 @admin.register(Model3dArchive)
 class Model3dArchiveAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'file_path', 'size']
     actions = ['unpack_archives']
+
+    @admin.display()
+    def size(self, obj):
+        return filesizeformat(obj.archive.size)
+
+    @admin.display()
+    def file_path(self, obj):
+        return obj.archive.name
 
     @admin.action(description=_('Unpack archives'))
     def unpack_archives(self, request, queryset):
@@ -31,7 +42,7 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def process_import(self, request):
-
+        import_archives.Command().handle()
         return HttpResponseRedirect("../")
 
 

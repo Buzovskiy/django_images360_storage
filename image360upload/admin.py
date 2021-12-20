@@ -7,32 +7,35 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.urls import path
 from django.db import models
-from .models import Unpack3dModel, Image360, Model3dArchive
+from .models import Image360, Model3dArchive
 from django.shortcuts import render
 from django.contrib.admin import AdminSite
 from django.views.generic import TemplateView
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import filesizeformat
-from .management.commands import import_archives
+from .management.commands import import_archives, create_photos_360
+from django.contrib import messages
 
 
 @admin.register(Model3dArchive)
 class Model3dArchiveAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'file_path', 'size']
-    actions = ['unpack_archives']
+    list_display = ['id', '__str__', 'file_path', 'archive_size']
+    list_display_links = ['__str__']
+    actions = ['create_photos_360']
+    ordering = ['size']
 
-    @admin.display()
-    def size(self, obj):
+    @admin.display(description=_('Archive size'))
+    def archive_size(self, obj):
         return filesizeformat(obj.archive.size)
 
-    @admin.display()
+    @admin.display(description=_('Path to file'))
     def file_path(self, obj):
         return obj.archive.name
 
-    @admin.action(description=_('Unpack archives'))
-    def unpack_archives(self, request, queryset):
-        print('hello')
+    @admin.action(description=_('Create photos 360'))
+    def create_photos_360(self, request, queryset):
+        status = create_photos_360.Command().handle(outer_queryset=queryset)
 
     def get_urls(self):
         urls = super().get_urls()
@@ -42,12 +45,12 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def process_import(self, request):
-        import_archives.Command().handle()
+        status = import_archives.Command().handle()
+        if status == 'error':
+            messages.warning(request, _('Archives no found. Download them on the server'))
+        elif status == 'success':
+            messages.success(request, _('Archives imported successfully'))
         return HttpResponseRedirect("../")
-
-
-class Unpack3dForm(forms.Form):
-    pass
 
 
 @admin.register(Image360)
@@ -55,33 +58,33 @@ class Image360Admin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Unpack3dModel)
-class Unpack3dModelAdmin(admin.ModelAdmin):
-    def get_urls(self):
-        urls = super().get_urls()
-        my_urls = [
-            path('', self.admin_site.admin_view(self.unpack_view)),
-        ]
-        return my_urls + urls
-
-    # def has_add_permission(self, request, obj=None):
-    #     return False
-
-    def unpack_view(self, request):
-        if request.method == 'POST':
-            form = Unpack3dForm(request.POST)
-            if form.is_valid():
-                from .management.commands import unpack3d
-                unpack3d.Command().handle()
-                return HttpResponseRedirect(request.path_info)
-        else:
-            form = Unpack3dForm()
-        context = dict(
-            self.admin_site.each_context(request),
-            opts=self.model._meta,
-            form=form,
-        )
-        return TemplateResponse(request, "admin/unpack_3d_models.html", context)
+# @admin.register(Unpack3dModel)
+# class Unpack3dModelAdmin(admin.ModelAdmin):
+#     def get_urls(self):
+#         urls = super().get_urls()
+#         my_urls = [
+#             path('', self.admin_site.admin_view(self.unpack_view)),
+#         ]
+#         return my_urls + urls
+#
+#     # def has_add_permission(self, request, obj=None):
+#     #     return False
+#
+#     def unpack_view(self, request):
+#         if request.method == 'POST':
+#             form = Unpack3dForm(request.POST)
+#             if form.is_valid():
+#                 from .management.commands import unpack3d
+#                 unpack3d.Command().handle()
+#                 return HttpResponseRedirect(request.path_info)
+#         else:
+#             form = Unpack3dForm()
+#         context = dict(
+#             self.admin_site.each_context(request),
+#             opts=self.model._meta,
+#             form=form,
+#         )
+#         return TemplateResponse(request, "admin/unpack_3d_models.html", context)
 
 
 # @admin.register(Image360)

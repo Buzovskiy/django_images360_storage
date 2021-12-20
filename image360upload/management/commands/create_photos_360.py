@@ -2,6 +2,7 @@ import datetime
 import fnmatch
 import re
 
+from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand, CommandError
 from project.settings import MEDIA_ROOT
 import os
@@ -9,7 +10,7 @@ from pathlib import Path
 import zipfile
 import shutil
 from PIL import Image
-from image360upload.models import Unpack3dModel
+from image360upload.models import Image360, Model3dArchive
 
 
 class Command(BaseCommand):
@@ -20,12 +21,27 @@ class Command(BaseCommand):
         super(Command, self).__init__()
         Path(self.path_3d_models).mkdir(parents=True, exist_ok=True)
 
-    def import_archives(self, *args, **options):
-        files = [f for f in os.listdir(Path(self.path_3d_models / 'archives'))
-                 if re.search(r'.*\.zip$', f, re.IGNORECASE)]
-        print(files)
-        # if not len(files):
-        #     return False
+    def handle(self, outer_queryset=None, *args, **options):
+        if outer_queryset is None:
+            archives = Model3dArchive.objects.all()
+        else:
+            archives = outer_queryset
+
+        if not archives.count():
+            return False
+
+        for archive in archives:
+            dir_name = os.path.splitext(os.path.basename(archive.archive.name))[0]
+            iframe_src = Path(self.path_3d_models / 'Components/template_1/iframe.html')
+            with open(Path(iframe_src), 'rb') as fh:
+                with ContentFile(fh.read()) as file_content:
+                    # Set the media attribute of the object, but under an other path/filename
+                    image360 = Image360()
+                    image360.vendor_code = dir_name
+                    image360.iframe.save('iframe.html', file_content)
+                    # Save object
+                    image360.save()
+
         #
         # for file in files:
         #     dir_model_name = os.path.splitext(os.path.basename(Path(self.root_path_3d) / file))[0]

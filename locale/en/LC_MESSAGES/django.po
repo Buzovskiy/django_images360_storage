@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-18 09:08+0200\n"
+"POT-Creation-Date: 2021-12-20 13:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,26 +18,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .\image360upload\admin.py:28
+msgid "Path to file"
+msgstr ""
+
+#: .\image360upload\admin.py:32
+msgid "Unpack archives"
+msgstr ""
+
+#: .\image360upload\admin.py:46
+msgid "Archives no found. Download them on the server"
+msgstr ""
+
+#: .\image360upload\admin.py:48
+msgid "Archives imported successfully"
+msgstr ""
+
 #: .\image360upload\apps.py:8
 msgid "Image 360 upload"
 msgstr ""
 
-#: .\image360upload\models.py:7
+#: .\image360upload\models.py:26
 msgid "Product vendor code"
 msgstr ""
 
-#: .\image360upload\models.py:13
+#: .\image360upload\models.py:32
 msgid "Image 360 path"
 msgstr ""
 
-#: .\image360upload\models.py:23
+#: .\image360upload\models.py:42
 msgid "Unpack 3d model"
 msgstr ""
 
-#: .\image360upload\models.py:24
+#: .\image360upload\models.py:43
 msgid "Unpack 3d models"
 msgstr ""
 
-#: .\image360upload\templates\admin\unpack3dmodels.html:6
+#: .\image360upload\models.py:54 .\image360upload\models.py:74
+msgid "Archive"
+msgstr ""
+
+#: .\image360upload\models.py:62
+msgid "Archive size"
+msgstr ""
+
+#: .\image360upload\models.py:75
+msgid "Archives"
+msgstr ""
+
+#: .\image360upload\templates\admin\image360upload\model3darchive\change_list.html:6
+msgid "Import archives"
+msgstr ""
+
+#: .\image360upload\templates\admin\unpack_3d_models.html:6
 msgid "Home"
+msgstr ""
+
+#: .\image360upload\validators.py:10
+msgid "Unsupported file extension."
 msgstr ""

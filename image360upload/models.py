@@ -10,6 +10,26 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
 
+class Image360(models.Model):
+    vendor_code = models.CharField(
+        verbose_name=_('Product vendor code'),
+        max_length=255,
+        blank=False,
+        null=True,
+        unique=True,
+        editable=False,
+    )
+    iframe = models.FileField(
+        verbose_name=_('Image 360 path'),
+        max_length=255,
+        blank=False,
+        null=True,
+        upload_to='3d_models/models/%Y/%m/%d/',
+        # validators=[validate_file_extension],
+        # storage=MyFileStorage(),
+    )
+
+
 class MyFileStorage(FileSystemStorage):
     # This method is actually defined in Storage
     def get_available_name(self, name, max_length):
@@ -21,28 +41,6 @@ class MyFileStorage(FileSystemStorage):
         return name # simply returns the name passed
 
 
-class Image360(models.Model):
-    vendor_code = models.CharField(
-        verbose_name=_('Product vendor code'),
-        max_length=255,
-        blank=False,
-        null=True
-    )
-    image_360_path = models.CharField(
-        verbose_name=_('Image 360 path'),
-        max_length=255,
-        blank=False,
-        null=True
-    )
-
-
-class Unpack3dModel(models.Model):
-    class Meta:
-        managed = False
-        verbose_name = _('Unpack 3d model')
-        verbose_name_plural = _('Unpack 3d models')
-
-
 class Model3dArchive(models.Model):
     archive = models.FileField(
         upload_to='3d_models/archives/imported/',
@@ -51,11 +49,27 @@ class Model3dArchive(models.Model):
         blank=False,
         storage=MyFileStorage(),
         unique=True,
+        verbose_name=_('Archive'),
     )
+    size = models.CharField(
+        max_length=255,
+        editable=False,
+        null=False,
+        blank=False,
+        default=1000,
+        verbose_name=_('Archive size')
+    )
+
+    def save(self, *args, **kwargs):
+        self.size = self.archive.size
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return os.path.basename(self.archive.name)
 
+    class Meta:
+        verbose_name = _('Archive')
+        verbose_name_plural = _('Archives')
 
 
 @receiver(post_delete, sender=Model3dArchive)

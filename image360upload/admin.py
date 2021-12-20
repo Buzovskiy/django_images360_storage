@@ -55,7 +55,7 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
 
 @admin.register(Image360)
 class Image360Admin(admin.ModelAdmin):
-    pass
+    list_display = ['vendor_code', 'iframe']
 
 
 # @admin.register(Unpack3dModel)

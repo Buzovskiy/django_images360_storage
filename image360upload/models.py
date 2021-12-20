@@ -8,6 +8,15 @@ from .validators import validate_file_extension
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+import pathlib
+import datetime
+
+
+def iframe_upload_to_function(instance, filename):
+    """ this function has to return the location to upload the file """
+    # return pathlib.Path(settings.MEDIA_ROOT / '3d_models/models/%Y/%m/%d' / instance.vendor_code / filename)
+    now = datetime.date.today()
+    return f'3d_models/models/{now:%Y/%m/%d}/{instance.vendor_code}/{filename}'
 
 
 class Image360(models.Model):
@@ -24,7 +33,8 @@ class Image360(models.Model):
         max_length=255,
         blank=False,
         null=True,
-        upload_to='3d_models/models/%Y/%m/%d/',
+        # upload_to='3d_models/models/%Y/%m/%d/',
+        upload_to=iframe_upload_to_function,
         # validators=[validate_file_extension],
         # storage=MyFileStorage(),
     )

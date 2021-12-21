@@ -19,6 +19,18 @@ def iframe_upload_to_function(instance, filename):
     return f'3d_models/models/{now:%Y/%m/%d}/{instance.vendor_code}/{filename}'
 
 
+class Image360FileStorage(FileSystemStorage):
+    # This method is actually defined in Storage
+    def get_available_name(self, name, max_length):
+        # archive_objects = Model3dArchive.objects.filter(archive__endswith=os.path.basename(name)).all()
+        # if archive_objects.count():
+        #     for archive_object in archive_objects:
+        #         if os.path.basename(name) == os.path.basename(archive_object.archive.name):
+        #             archive_object.delete()
+        print(os.path.basename(pathlib.Path(settings.MEDIA_ROOT / name).parent))
+        return name # simply returns the name passed
+
+
 class Image360(models.Model):
     vendor_code = models.CharField(
         verbose_name=_('Product vendor code'),
@@ -33,10 +45,9 @@ class Image360(models.Model):
         max_length=255,
         blank=False,
         null=True,
-        # upload_to='3d_models/models/%Y/%m/%d/',
         upload_to=iframe_upload_to_function,
         # validators=[validate_file_extension],
-        # storage=MyFileStorage(),
+        storage=Image360FileStorage(),
     )
 
 

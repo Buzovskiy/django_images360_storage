@@ -1,7 +1,6 @@
 # https://adriennedomingus.com/blog/adding-custom-views-and-templates-to-django-admin
 
-from django.contrib import admin
-
+import pathlib
 from django.contrib import admin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
@@ -16,6 +15,9 @@ from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import filesizeformat
 from .management.commands import import_archives, create_photos_360
 from django.contrib import messages
+from django.conf import settings
+from django.conf.urls.static import static
+from django.utils.safestring import mark_safe
 
 
 @admin.register(Model3dArchive)
@@ -35,7 +37,8 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
 
     @admin.action(description=_('Create photos 360'))
     def create_photos_360(self, request, queryset):
-        status = create_photos_360.Command().handle(outer_queryset=queryset)
+        status = create_photos_360.Command().handle(outer_queryset=queryset, request=request)
+        messages.success(request, _('Models 360 are created'))
 
     def get_urls(self):
         urls = super().get_urls()
@@ -55,7 +58,25 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
 
 @admin.register(Image360)
 class Image360Admin(admin.ModelAdmin):
-    list_display = ['vendor_code', 'iframe']
+    list_display = ['id', 'vendor_code', 'iframe']
+    list_display_links = ['vendor_code']
+    fields = ['vendor_code', 'iframe', 'model360']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        self.my_request = request
+        return qs
+
+    @admin.display(description=_('Image 360'))
+    def model360(self, obj):
+        print(self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name))
+        # return mark_safe()
+        return render(self.my_request, 'admin/image360upload/image360/test.html')
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
 
 # @admin.register(Unpack3dModel)

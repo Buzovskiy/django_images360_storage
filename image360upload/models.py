@@ -19,16 +19,21 @@ def iframe_upload_to_function(instance, filename):
     return f'3d_models/models/{now:%Y/%m/%d}/{instance.vendor_code}/{filename}'
 
 
-class Image360FileStorage(FileSystemStorage):
-    # This method is actually defined in Storage
-    def get_available_name(self, name, max_length):
-        # archive_objects = Model3dArchive.objects.filter(archive__endswith=os.path.basename(name)).all()
-        # if archive_objects.count():
-        #     for archive_object in archive_objects:
-        #         if os.path.basename(name) == os.path.basename(archive_object.archive.name):
-        #             archive_object.delete()
-        print(os.path.basename(pathlib.Path(settings.MEDIA_ROOT / name).parent))
-        return name # simply returns the name passed
+# class Image360FileStorage(FileSystemStorage):
+#     # This method is actually defined in Storage
+#     def get_available_name(self, name, max_length):
+#         # archive_objects = Model3dArchive.objects.filter(archive__endswith=os.path.basename(name)).all()
+#         # if archive_objects.count():
+#         #     for archive_object in archive_objects:
+#         #         if os.path.basename(name) == os.path.basename(archive_object.archive.name):
+#         #             archive_object.delete()
+#         vendor_code_new = print(os.path.basename(pathlib.Path(settings.MEDIA_ROOT / name).parent))
+#         # Если в базе есть такой же артикул, удаляем запись из базы с файлами.
+#         for model360 in Image360.objects.filter(vendor_code=vendor_code_new):
+#             model360.delete()
+#
+#         return name # simply returns the name passed
+
 
 
 class Image360(models.Model):
@@ -46,9 +51,22 @@ class Image360(models.Model):
         blank=False,
         null=True,
         upload_to=iframe_upload_to_function,
-        # validators=[validate_file_extension],
-        storage=Image360FileStorage(),
     )
+
+
+@receiver(post_delete, sender=Image360)
+def post_delete_image360(sender, instance, *args, **kwargs):
+    """When we delete image360 instance, delete old image360 file and parent directory"""
+    try:
+        # Remember path to parent directory
+        parent = pathlib.Path(instance.iframe.path).parent
+        # Remove record
+        instance.iframe.delete(save=False)
+        print(parent)
+        # Remove parent
+        shutil.rmtree(parent)
+    except:
+        pass
 
 
 class MyFileStorage(FileSystemStorage):
@@ -114,21 +132,6 @@ def pre_save_archive(sender, instance, *args, **kwargs):
         if new_file != old_file:
             if os.path.exists(old_file):
                 os.remove(old_file)
-    except:
-        pass
-
-
-@receiver(post_delete, sender=Image360)
-def post_delete_image360(sender, instance, *args, **kwargs):
-    """When we delete image360 instance, delete old image360 file and parent directory"""
-    try:
-        # Remember path to parent directory
-        parent = pathlib.Path(instance.iframe.path).parent
-        # Remove record
-        instance.iframe.delete(save=False)
-        print(parent)
-        # Remove parent
-        shutil.rmtree(parent)
     except:
         pass
 

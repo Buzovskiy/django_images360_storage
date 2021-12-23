@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
-# from image360upload.admin import myadminsite
+
+from image360upload import views
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'image360', views.Image360ViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
 
 if 'rosetta' in settings.INSTALLED_APPS:

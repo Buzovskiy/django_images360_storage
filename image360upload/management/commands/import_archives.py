@@ -1,6 +1,6 @@
 import re
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from project.settings import MEDIA_ROOT
 import os
 from pathlib import Path

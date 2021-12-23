@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rosetta',
+    'rest_framework',
     'image360upload',
 ]
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-20 13:56+0200\n"
+"POT-Creation-Date: 2021-12-23 12:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\image360upload\admin.py:28
+#: .\image360upload\admin.py:30 .\image360upload\models.py:105
+msgid "Archive size"
+msgstr ""
+
+#: .\image360upload\admin.py:34
 msgid "Path to file"
 msgstr ""
 
-#: .\image360upload\admin.py:32
-msgid "Unpack archives"
+#: .\image360upload\admin.py:38
+msgid "Create photos 360"
 msgstr ""
 
-#: .\image360upload\admin.py:46
+#: .\image360upload\admin.py:41
+msgid "Models 360 are created"
+msgstr ""
+
+#: .\image360upload\admin.py:53
 msgid "Archives no found. Download them on the server"
 msgstr ""
 
-#: .\image360upload\admin.py:48
+#: .\image360upload\admin.py:55
 msgid "Archives imported successfully"
+msgstr ""
+
+#: .\image360upload\admin.py:70
+msgid "Image 360"
 msgstr ""
 
 #: .\image360upload\apps.py:8
 msgid "Image 360 upload"
 msgstr ""
 
-#: .\image360upload\models.py:26
+#: .\image360upload\management\commands\create_photos_360.py:63
+#: .\image360upload\management\commands\create_photos_360.py:64
+msgid "No images found in archive"
+msgstr ""
+
+#: .\image360upload\models.py:40
 msgid "Product vendor code"
 msgstr ""
 
-#: .\image360upload\models.py:32
+#: .\image360upload\models.py:48
 msgid "Image 360 path"
 msgstr ""
 
-#: .\image360upload\models.py:42
-msgid "Unpack 3d model"
+#: .\image360upload\models.py:59
+msgid "Model 360"
 msgstr ""
 
-#: .\image360upload\models.py:43
-msgid "Unpack 3d models"
+#: .\image360upload\models.py:60
+msgid "Models 360"
 msgstr ""
 
-#: .\image360upload\models.py:54 .\image360upload\models.py:74
+#: .\image360upload\models.py:97 .\image360upload\models.py:116
 msgid "Archive"
 msgstr ""
 
-#: .\image360upload\models.py:62
-msgid "Archive size"
-msgstr ""
-
-#: .\image360upload\models.py:75
+#: .\image360upload\models.py:117
 msgid "Archives"
 msgstr ""
 

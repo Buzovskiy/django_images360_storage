@@ -1,16 +1,9 @@
 # https://adriennedomingus.com/blog/adding-custom-views-and-templates-to-django-admin
 
-import pathlib
 from django.contrib import admin
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template.response import TemplateResponse
+from django.http import HttpResponseRedirect
 from django.urls import path
-from django.db import models
 from .models import Image360, Model3dArchive
-from django.shortcuts import render
-from django.contrib.admin import AdminSite
-from django.views.generic import TemplateView
-from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import filesizeformat
 from django.template.response import TemplateResponse
@@ -69,9 +62,6 @@ class Image360Admin(admin.ModelAdmin):
 
     @admin.display(description=_('Image 360'))
     def model360(self, obj):
-        print(self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name))
-        # return mark_safe()
-        # return render(self.my_request, 'admin/image360upload/image360/test.html')
         url = self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name)
         context = {'url': url}
         content = TemplateResponse(self.my_request, 'admin/image360upload/image360/iframe.html', context)

@@ -35,7 +35,6 @@ def iframe_upload_to_function(instance, filename):
 #         return name # simply returns the name passed
 
 
-
 class Image360(models.Model):
     vendor_code = models.CharField(
         verbose_name=_('Product vendor code'),
@@ -52,6 +51,17 @@ class Image360(models.Model):
         null=True,
         upload_to=iframe_upload_to_function,
     )
+
+    # @property
+    # def image360url(self):
+    #     return self.vendor_code
+
+    def __str__(self):
+        return f"{_('Model 360')} {self.vendor_code}"
+
+    class Meta:
+        verbose_name = _('Model 360')
+        verbose_name_plural = _('Models 360')
 
 
 @receiver(post_delete, sender=Image360)

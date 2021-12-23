@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-20 13:56+0200\n"
-"PO-Revision-Date: 2021-12-20 13:57+0000\n"
+"POT-Creation-Date: 2021-12-23 12:46+0200\n"
+"PO-Revision-Date: 2021-12-23 12:48+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,51 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\image360upload\admin.py:28
+#: .\image360upload\admin.py:30 .\image360upload\models.py:105
+msgid "Archive size"
+msgstr "Размер архива"
+
+#: .\image360upload\admin.py:34
 msgid "Path to file"
 msgstr "Путь к файлу"
 
-#: .\image360upload\admin.py:32
-msgid "Unpack archives"
-msgstr "Распаковать архивы"
+#: .\image360upload\admin.py:38
+msgid "Create photos 360"
+msgstr "Создать модель 360"
 
-#: .\image360upload\admin.py:46
+#: .\image360upload\admin.py:41
+msgid "Models 360 are created"
+msgstr "Модели 360 созданы"
+
+#: .\image360upload\admin.py:53
 msgid "Archives no found. Download them on the server"
 msgstr "Архивы не найдены. Загрузите их на сервер"
 
-#: .\image360upload\admin.py:48
+#: .\image360upload\admin.py:55
 msgid "Archives imported successfully"
 msgstr "Архивы успешно импортированы"
+
+#: .\image360upload\admin.py:70
+#| msgid "Image 360 path"
+msgid "Image 360"
+msgstr "Модель 360"
 
 #: .\image360upload\apps.py:8
 msgid "Image 360 upload"
 msgstr "Выгрузка 3d моделей"
 
-#: .\image360upload\models.py:26
+#: .\image360upload\management\commands\create_photos_360.py:63
+#: .\image360upload\management\commands\create_photos_360.py:64
+msgid "No images found in archive"
+msgstr "В архиве не найдены изображения"
+
+#: .\image360upload\models.py:40
 msgid "Product vendor code"
 msgstr "Артикул товара"
 
-#: .\image360upload\models.py:32
+#: .\image360upload\models.py:48
 msgid "Image 360 path"
 msgstr "Путь к 3d модели"
 
-#: .\image360upload\models.py:42
-msgid "Unpack 3d model"
-msgstr "Распаковать 3d модель"
+#: .\image360upload\models.py:59
+msgid "Model 360"
+msgstr "Модель 360"
 
-#: .\image360upload\models.py:43
-msgid "Unpack 3d models"
-msgstr "Распаковать 3d модели"
+#: .\image360upload\models.py:60
+msgid "Models 360"
+msgstr "Модели 360"
 
-#: .\image360upload\models.py:54 .\image360upload\models.py:74
+#: .\image360upload\models.py:97 .\image360upload\models.py:116
 msgid "Archive"
 msgstr "Архив"
 
-#: .\image360upload\models.py:62
-msgid "Archive size"
-msgstr "Размер архива"
-
-#: .\image360upload\models.py:75
+#: .\image360upload\models.py:117
 msgid "Archives"
 msgstr "Архивы"
 
@@ -78,6 +92,15 @@ msgstr "Домой"
 #: .\image360upload\validators.py:10
 msgid "Unsupported file extension."
 msgstr "Расширение файла не поддерживается"
+
+#~ msgid "Unpack archives"
+#~ msgstr "Распаковать архивы"
+
+#~ msgid "Unpack 3d model"
+#~ msgstr "Распаковать 3d модель"
+
+#~ msgid "Unpack 3d models"
+#~ msgstr "Распаковать 3d модели"
 
 #~ msgid "Archives no found"
 #~ msgstr "Архивы не найдены"

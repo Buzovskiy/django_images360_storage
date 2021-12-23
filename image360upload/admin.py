@@ -13,10 +13,10 @@ from django.views.generic import TemplateView
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import filesizeformat
+from django.template.response import TemplateResponse
 from .management.commands import import_archives, create_photos_360
 from django.contrib import messages
 from django.conf import settings
-from django.conf.urls.static import static
 from django.utils.safestring import mark_safe
 
 
@@ -71,7 +71,12 @@ class Image360Admin(admin.ModelAdmin):
     def model360(self, obj):
         print(self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name))
         # return mark_safe()
-        return render(self.my_request, 'admin/image360upload/image360/test.html')
+        # return render(self.my_request, 'admin/image360upload/image360/test.html')
+        url = self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name)
+        context = {'url': url}
+        content = TemplateResponse(self.my_request, 'admin/image360upload/image360/iframe.html', context)
+        return mark_safe(content.render().content.decode("utf-8"))
+
     def has_add_permission(self, request, obj=None):
         return False
 

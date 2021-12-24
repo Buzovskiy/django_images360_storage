@@ -11,6 +11,7 @@ from .management.commands import import_archives, create_photos_360
 from django.contrib import messages
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @admin.register(Image360Archive)
@@ -30,7 +31,7 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
 
     @admin.action(description=_('Create photos 360'))
     def create_photos_360(self, request, queryset):
-        status = create_photos_360.Command().handle(outer_queryset=queryset, request=request)
+        create_photos_360.Command().handle(outer_queryset=queryset, request=request)
         messages.success(request, _('Models 360 are created'))
 
     def get_urls(self):
@@ -83,6 +84,22 @@ class RemoteUpdateImages360UrlInline(admin.TabularInline):
 class WebsiteAdmin(admin.ModelAdmin):
     list_display = ['website', 'api_key']
     inlines = [RemoteUpdateImages360UrlInline]
+    actions = ['send_images_on_sites']
+
+    @admin.action(description=_('Send images 360 on chosen websites'))
+    def send_images_on_sites(self, request, queryset):
+        # websites = RemoteUpdateImages360Url.objects.select_related('website').filter(website__in=queryset)
+        websites = queryset.select_related('remoteupdateimages360url')
+        for website in websites:
+            try:
+                print(website.remoteupdateimages360url.url)
+            except ObjectDoesNotExist as e:
+                messages.warning(request, mark_safe(f'<b>{website.website}</b>: {e}'))
+            else:
+                messages.success(
+                    request,
+                    mark_safe(f'<b>{website.website}</b>: {_("Images 360 are successfully sent")}')
+                )
 
 # @admin.register(Unpack3dModel)
 # class Unpack3dModelAdmin(admin.ModelAdmin):

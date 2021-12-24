@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 12:46+0200\n"
+"POT-Creation-Date: 2021-12-24 15:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\image360upload\admin.py:30 .\image360upload\models.py:105
+#: .\image360upload\admin.py:23 .\image360upload\models.py:89
 msgid "Archive size"
 msgstr ""
 
-#: .\image360upload\admin.py:34
+#: .\image360upload\admin.py:27
 msgid "Path to file"
 msgstr ""
 
-#: .\image360upload\admin.py:38
+#: .\image360upload\admin.py:31
 msgid "Create photos 360"
 msgstr ""
 
-#: .\image360upload\admin.py:41
+#: .\image360upload\admin.py:34
 msgid "Models 360 are created"
 msgstr ""
 
-#: .\image360upload\admin.py:53
+#: .\image360upload\admin.py:46
 msgid "Archives no found. Download them on the server"
 msgstr ""
 
-#: .\image360upload\admin.py:55
+#: .\image360upload\admin.py:48
 msgid "Archives imported successfully"
 msgstr ""
 
-#: .\image360upload\admin.py:70
+#: .\image360upload\admin.py:63
 msgid "Image 360"
 msgstr ""
 
@@ -50,43 +50,71 @@ msgstr ""
 msgid "Image 360 upload"
 msgstr ""
 
-#: .\image360upload\management\commands\create_photos_360.py:63
-#: .\image360upload\management\commands\create_photos_360.py:64
+#: .\image360upload\management\commands\create_photos_360.py:72
+#: .\image360upload\management\commands\create_photos_360.py:73
 msgid "No images found in archive"
 msgstr ""
 
-#: .\image360upload\models.py:40
+#: .\image360upload\models.py:23
 msgid "Product vendor code"
 msgstr ""
 
-#: .\image360upload\models.py:48
+#: .\image360upload\models.py:31
 msgid "Image 360 path"
 msgstr ""
 
-#: .\image360upload\models.py:59
+#: .\image360upload\models.py:37
+msgid "The date of creation"
+msgstr ""
+
+#: .\image360upload\models.py:43
 msgid "Model 360"
 msgstr ""
 
-#: .\image360upload\models.py:60
+#: .\image360upload\models.py:44
 msgid "Models 360"
 msgstr ""
 
-#: .\image360upload\models.py:97 .\image360upload\models.py:116
+#: .\image360upload\models.py:81 .\image360upload\models.py:100
 msgid "Archive"
 msgstr ""
 
-#: .\image360upload\models.py:117
+#: .\image360upload\models.py:101
 msgid "Archives"
 msgstr ""
 
-#: .\image360upload\templates\admin\image360upload\model3darchive\change_list.html:6
-msgid "Import archives"
+#: .\image360upload\models.py:131 .\image360upload\models.py:153
+msgid "Web site"
 msgstr ""
 
-#: .\image360upload\templates\admin\unpack_3d_models.html:6
-msgid "Home"
+#: .\image360upload\models.py:134
+msgid ""
+"Enter website domain you want to provide images 360 access for. E.g., "
+"example.com"
+msgstr ""
+
+#: .\image360upload\models.py:137
+msgid "Api key"
+msgstr ""
+
+#: .\image360upload\models.py:140
+msgid ""
+"Enter API key for image 360 access or live it empty in order the system "
+"generated it automatically"
+msgstr ""
+
+#: .\image360upload\models.py:154
+msgid "Web sites"
+msgstr ""
+
+#: .\image360upload\templates\admin\image360upload\image360darchive\change_list.html:6
+msgid "Import archives"
 msgstr ""
 
 #: .\image360upload\validators.py:10
 msgid "Unsupported file extension."
+msgstr ""
+
+#: .\project\urls.py:40 .\project\urls.py:41
+msgid "Images 360 administration"
 msgstr ""

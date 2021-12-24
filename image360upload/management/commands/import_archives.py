@@ -4,14 +4,14 @@ from django.core.management.base import BaseCommand
 from project.settings import MEDIA_ROOT
 import os
 from pathlib import Path
-from image360upload.models import Model3dArchive
+from image360upload.models import Image360Archive
 from django.core.files.base import ContentFile
 
 
 class Command(BaseCommand):
     """
     Комманда, которая подтягивает архивы с 3d фото из папки uploaded и для каждого файла
-    создает ORM объект c поле archive.
+    создает ORM объект c полем archive.
     Если архив уже ранее был подтянут, то файл и объект будет удалены и созданы будут
     новый файл и ORM объект.
     """
@@ -34,7 +34,7 @@ class Command(BaseCommand):
             with open(Path(path_to_archive_uploaded_file), 'rb') as fh:
                 with ContentFile(fh.read()) as file_content:
                     # Set the media attribute of the object, but under an other path/filename
-                    model_archive = Model3dArchive()
+                    model_archive = Image360Archive()
                     model_archive.archive.save(file, file_content)
                     # Save object
                     model_archive.save()

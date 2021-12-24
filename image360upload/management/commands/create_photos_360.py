@@ -8,13 +8,24 @@ from pathlib import Path
 import zipfile
 import shutil
 from PIL import Image
-from image360upload.models import Image360, Model3dArchive
+from image360upload.models import Image360, Image360Archive
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
 
 class Command(BaseCommand):
-    help = 'Command which makes 3d images'
+    """
+    The programm for creation of images 360:
+    -  get imported archives with images by requesting the database;
+    - look for the duplicated of images 360 by archive name. If the copies are found they are to be deleted;
+    - Create object of image 360 in the datebase. Associate it with the file iframe.html. As a result the directory of
+      image 360 is created with the vendor code name where iframe.html is put;
+    - unzip archive.
+    - in specified directory the imageslarge folder is created and images from the archive are put;
+    - create images folder and put there resized images;
+    - copy necessary components in image 360 folder.
+    """
+    help = 'Command which makes images 360'
     path_3d_models = MEDIA_ROOT / '3d_models'
 
     def __init__(self):
@@ -23,7 +34,7 @@ class Command(BaseCommand):
 
     def handle(self, outer_queryset=None, request=None, *args, **options):
         if outer_queryset is None:
-            archives = Model3dArchive.objects.all()
+            archives = Image360Archive.objects.all()
         else:
             archives = outer_queryset
 

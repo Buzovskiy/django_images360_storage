@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 12:46+0200\n"
-"PO-Revision-Date: 2021-12-23 12:48+0000\n"
+"POT-Creation-Date: 2021-12-24 15:23+0200\n"
+"PO-Revision-Date: 2021-12-24 15:24+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,79 +19,116 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\image360upload\admin.py:30 .\image360upload\models.py:105
+#: .\image360upload\admin.py:23 .\image360upload\models.py:89
 msgid "Archive size"
 msgstr "Размер архива"
 
-#: .\image360upload\admin.py:34
+#: .\image360upload\admin.py:27
 msgid "Path to file"
 msgstr "Путь к файлу"
 
-#: .\image360upload\admin.py:38
+#: .\image360upload\admin.py:31
 msgid "Create photos 360"
-msgstr "Создать модель 360"
+msgstr "Создать изображение 360"
 
-#: .\image360upload\admin.py:41
+#: .\image360upload\admin.py:34
 msgid "Models 360 are created"
-msgstr "Модели 360 созданы"
+msgstr "Изображения 360 созданы"
 
-#: .\image360upload\admin.py:53
+#: .\image360upload\admin.py:46
 msgid "Archives no found. Download them on the server"
 msgstr "Архивы не найдены. Загрузите их на сервер"
 
-#: .\image360upload\admin.py:55
+#: .\image360upload\admin.py:48
 msgid "Archives imported successfully"
 msgstr "Архивы успешно импортированы"
 
-#: .\image360upload\admin.py:70
-#| msgid "Image 360 path"
+#: .\image360upload\admin.py:63
 msgid "Image 360"
-msgstr "Модель 360"
+msgstr "Изображение 360"
 
 #: .\image360upload\apps.py:8
 msgid "Image 360 upload"
-msgstr "Выгрузка 3d моделей"
+msgstr "Выгрузка изображений 360"
 
-#: .\image360upload\management\commands\create_photos_360.py:63
-#: .\image360upload\management\commands\create_photos_360.py:64
+#: .\image360upload\management\commands\create_photos_360.py:72
+#: .\image360upload\management\commands\create_photos_360.py:73
 msgid "No images found in archive"
 msgstr "В архиве не найдены изображения"
 
-#: .\image360upload\models.py:40
+#: .\image360upload\models.py:23
 msgid "Product vendor code"
 msgstr "Артикул товара"
 
-#: .\image360upload\models.py:48
+#: .\image360upload\models.py:31
 msgid "Image 360 path"
 msgstr "Путь к 3d модели"
 
-#: .\image360upload\models.py:59
+#: .\image360upload\models.py:37
+msgid "The date of creation"
+msgstr "Дата создания"
+
+#: .\image360upload\models.py:43
 msgid "Model 360"
-msgstr "Модель 360"
+msgstr "Изображение 360"
 
-#: .\image360upload\models.py:60
+#: .\image360upload\models.py:44
 msgid "Models 360"
-msgstr "Модели 360"
+msgstr "Изображения 360"
 
-#: .\image360upload\models.py:97 .\image360upload\models.py:116
+#: .\image360upload\models.py:81 .\image360upload\models.py:100
 msgid "Archive"
 msgstr "Архив"
 
-#: .\image360upload\models.py:117
+#: .\image360upload\models.py:101
 msgid "Archives"
 msgstr "Архивы"
 
-#: .\image360upload\templates\admin\image360upload\model3darchive\change_list.html:6
+#: .\image360upload\models.py:131 .\image360upload\models.py:153
+msgid "Web site"
+msgstr "Веб сайт"
+
+#: .\image360upload\models.py:134
+msgid ""
+"Enter website domain you want to provide images 360 access for. E.g., "
+"example.com"
+msgstr ""
+"Введите домен веб-сайта, для которого вы хотите предоставить доступ к "
+"изображениям 360. Например, example.com"
+
+#: .\image360upload\models.py:137
+msgid "Api key"
+msgstr "Ключ api"
+
+#: .\image360upload\models.py:140
+msgid ""
+"Enter API key for image 360 access or live it empty in order the system "
+"generated it automatically"
+msgstr ""
+"Введите ключ API для доступа к изображению 360 или оставьте его пустым, "
+"чтобы система сгенерировала его автоматически."
+
+#: .\image360upload\models.py:154
+msgid "Web sites"
+msgstr "Веб сайты"
+
+#: .\image360upload\templates\admin\image360upload\image360darchive\change_list.html:6
 msgid "Import archives"
 msgstr "Импортировать архивы"
-
-#: .\image360upload\templates\admin\unpack_3d_models.html:6
-msgid "Home"
-msgstr "Домой"
 
 #: .\image360upload\validators.py:10
 msgid "Unsupported file extension."
 msgstr "Расширение файла не поддерживается"
+
+#: .\project\urls.py:40 .\project\urls.py:41
+msgid "Images 360 administration"
+msgstr "Администрирование изображений 360"
+
+#~ msgid "Home"
+#~ msgstr "Домой"
+
+#~ msgid "Enter api key for images 360 access"
+#~ msgstr "Введите ключ API для доступа к изображениям 360"
 
 #~ msgid "Unpack archives"
 #~ msgstr "Распаковать архивы"

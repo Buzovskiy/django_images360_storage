@@ -2,37 +2,20 @@ import os
 import pathlib
 import datetime
 import shutil
+import secrets
 
 from django.db import models
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from .validators import validate_file_extension
-from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.conf import settings
+from .validators import validate_file_extension
 
 
 def iframe_upload_to_function(instance, filename):
     """ this function has to return the location to upload the file """
     now = datetime.date.today()
     return f'3d_models/models/{now:%Y/%m/%d}/{instance.vendor_code}/{filename}'
-
-
-# class Image360FileStorage(FileSystemStorage):
-#     # This method is actually defined in Storage
-#     def get_available_name(self, name, max_length):
-#         # archive_objects = Model3dArchive.objects.filter(archive__endswith=os.path.basename(name)).all()
-#         # if archive_objects.count():
-#         #     for archive_object in archive_objects:
-#         #         if os.path.basename(name) == os.path.basename(archive_object.archive.name):
-#         #             archive_object.delete()
-#         vendor_code_new = print(os.path.basename(pathlib.Path(settings.MEDIA_ROOT / name).parent))
-#         # Если в базе есть такой же артикул, удаляем запись из базы с файлами.
-#         for model360 in Image360.objects.filter(vendor_code=vendor_code_new):
-#             model360.delete()
-#
-#         return name # simply returns the name passed
 
 
 class Image360(models.Model):
@@ -51,10 +34,7 @@ class Image360(models.Model):
         null=True,
         upload_to=iframe_upload_to_function,
     )
-
-    # @property
-    # def image360url(self):
-    #     return self.vendor_code
+    date = models.DateTimeField(verbose_name=_('The date of creation'), auto_now_add=True, null=True)
 
     def __str__(self):
         return f"{_('Model 360')} {self.vendor_code}"
@@ -82,7 +62,7 @@ def post_delete_image360(sender, instance, *args, **kwargs):
 class MyFileStorage(FileSystemStorage):
     # This method is actually defined in Storage
     def get_available_name(self, name, max_length):
-        archive_objects = Model3dArchive.objects.filter(archive__endswith=os.path.basename(name)).all()
+        archive_objects = Image360Archive.objects.filter(archive__endswith=os.path.basename(name)).all()
         if archive_objects.count():
             for archive_object in archive_objects:
                 if os.path.basename(name) == os.path.basename(archive_object.archive.name):
@@ -90,7 +70,7 @@ class MyFileStorage(FileSystemStorage):
         return name # simply returns the name passed
 
 
-class Model3dArchive(models.Model):
+class Image360Archive(models.Model):
     archive = models.FileField(
         upload_to='3d_models/archives/imported/',
         validators=[validate_file_extension],
@@ -121,7 +101,7 @@ class Model3dArchive(models.Model):
         verbose_name_plural = _('Archives')
 
 
-@receiver(post_delete, sender=Model3dArchive)
+@receiver(post_delete, sender=Image360Archive)
 def post_delete_archive(sender, instance, *args, **kwargs):
     """When we delete archive instance, delete old archive file """
     try:
@@ -130,7 +110,7 @@ def post_delete_archive(sender, instance, *args, **kwargs):
         pass
 
 
-@receiver(pre_save, sender=Model3dArchive)
+@receiver(pre_save, sender=Image360Archive)
 def pre_save_archive(sender, instance, *args, **kwargs):
     """When update archive, delete old archive file.Instance old archive file will delete from os """
     try:
@@ -146,20 +126,43 @@ def pre_save_archive(sender, instance, *args, **kwargs):
         pass
 
 
-# @receiver(pre_save, sender=Model3dArchive)
-# def pre_save_archive(sender, instance, *args, **kwargs):
-#     """When update archive, delete old archive file.Instance old archive file will delete from os """
-#     try:
-#         old_file = instance.__class__.objects.get(pk=instance.id).archive.path
-#         try:
-#             new_file = instance.archive.path
-#         except:
-#             new_file = None
-#         if new_file != old_file:
-#             if os.path.exists(old_file):
-#                 os.remove(old_file)
-#     except:
-#         pass
+class Website(models.Model):
+    website = models.CharField(
+        verbose_name=_('Web site'),
+        max_length=255,
+        unique=True,
+        help_text=_('Enter website domain you want to provide images 360 access for. E.g., example.com'),
+    )
+    api_key = models.CharField(
+        verbose_name=_('Api key'),
+        max_length=255,
+        blank=True,
+        unique=True,
+        help_text=_('Enter API key for image 360 access or live it empty in order the system generated it '
+                    'automatically')
+    )
+
+    def __str__(self):
+        return self.website
+
+    def save(self, *args, **kwargs):
+        if not self.api_key:
+            self.api_key = secrets.token_hex(16)
+            # Iterate until get unique api_key
+            while Website.objects.filter(api_key=self.api_key).count():
+                self.api_key = secrets.token_hex(16)
+        super(Website, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = _('Web site')
+        verbose_name_plural = _('Web sites')
+
+
+class RemoteUpdateImages360Url(models.Model):
+    website = models.OneToOneField(Website, on_delete=models.CASCADE)
+    url = models.CharField(max_length=255, blank=True, null=True)
+
+
 
 
 

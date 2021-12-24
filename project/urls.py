@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.utils.translation import gettext_lazy as _
 
 from image360upload import views
 from rest_framework import routers
@@ -35,3 +36,6 @@ if 'rosetta' in settings.INSTALLED_APPS:
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = _('Images 360 administration')
+admin.site.site_title = _('Images 360 administration')

@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import path
-from .models import Image360, Model3dArchive
+from .models import Image360, Image360Archive, Website, RemoteUpdateImages360Url
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import filesizeformat
 from django.template.response import TemplateResponse
@@ -13,7 +13,7 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 
 
-@admin.register(Model3dArchive)
+@admin.register(Image360Archive)
 class Model3dArchiveAdmin(admin.ModelAdmin):
     list_display = ['id', '__str__', 'file_path', 'archive_size']
     list_display_links = ['__str__']
@@ -51,9 +51,9 @@ class Model3dArchiveAdmin(admin.ModelAdmin):
 
 @admin.register(Image360)
 class Image360Admin(admin.ModelAdmin):
-    list_display = ['id', 'vendor_code', 'iframe']
+    list_display = ['id', 'vendor_code', 'iframe', 'date']
     list_display_links = ['vendor_code']
-    fields = ['vendor_code', 'iframe', 'model360']
+    fields = ['vendor_code', 'iframe', 'model360', 'date']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -73,6 +73,16 @@ class Image360Admin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         return False
 
+
+class RemoteUpdateImages360UrlInline(admin.TabularInline):
+    model = RemoteUpdateImages360Url
+    extra = 0
+
+
+@admin.register(Website)
+class WebsiteAdmin(admin.ModelAdmin):
+    list_display = ['website', 'api_key']
+    inlines = [RemoteUpdateImages360UrlInline]
 
 # @admin.register(Unpack3dModel)
 # class Unpack3dModelAdmin(admin.ModelAdmin):

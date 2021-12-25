@@ -12,6 +12,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.core.exceptions import ObjectDoesNotExist
+import urllib.request
+from urllib.error import URLError
 
 
 @admin.register(Image360Archive)
@@ -93,7 +95,8 @@ class WebsiteAdmin(admin.ModelAdmin):
         for website in websites:
             try:
                 print(website.remoteupdateimages360url.url)
-            except ObjectDoesNotExist as e:
+                urllib.request.urlopen(website.remoteupdateimages360url.url)
+            except (ObjectDoesNotExist, URLError) as e:
                 messages.warning(request, mark_safe(f'<b>{website.website}</b>: {e}'))
             else:
                 messages.success(

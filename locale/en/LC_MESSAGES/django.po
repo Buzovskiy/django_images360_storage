@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-24 15:23+0200\n"
+"POT-Creation-Date: 2021-12-26 23:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,32 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\image360upload\admin.py:23 .\image360upload\models.py:89
+#: .\image360upload\admin.py:26 .\image360upload\models.py:96
 msgid "Archive size"
 msgstr ""
 
-#: .\image360upload\admin.py:27
+#: .\image360upload\admin.py:30
 msgid "Path to file"
 msgstr ""
 
-#: .\image360upload\admin.py:31
+#: .\image360upload\admin.py:34
 msgid "Create photos 360"
 msgstr ""
 
-#: .\image360upload\admin.py:34
+#: .\image360upload\admin.py:37
 msgid "Models 360 are created"
 msgstr ""
 
-#: .\image360upload\admin.py:46
+#: .\image360upload\admin.py:49
 msgid "Archives no found. Download them on the server"
 msgstr ""
 
-#: .\image360upload\admin.py:48
+#: .\image360upload\admin.py:51
 msgid "Archives imported successfully"
 msgstr ""
 
-#: .\image360upload\admin.py:63
+#: .\image360upload\admin.py:66
 msgid "Image 360"
+msgstr ""
+
+#: .\image360upload\admin.py:91
+msgid "Send images 360 on chosen websites"
 msgstr ""
 
 #: .\image360upload\apps.py:8
@@ -75,39 +79,43 @@ msgstr ""
 msgid "Models 360"
 msgstr ""
 
-#: .\image360upload\models.py:81 .\image360upload\models.py:100
+#: .\image360upload\models.py:76
+msgid "Vendor code"
+msgstr ""
+
+#: .\image360upload\models.py:88 .\image360upload\models.py:107
 msgid "Archive"
 msgstr ""
 
-#: .\image360upload\models.py:101
+#: .\image360upload\models.py:108
 msgid "Archives"
 msgstr ""
 
-#: .\image360upload\models.py:131 .\image360upload\models.py:153
+#: .\image360upload\models.py:138 .\image360upload\models.py:164
 msgid "Web site"
 msgstr ""
 
-#: .\image360upload\models.py:134
+#: .\image360upload\models.py:141
 msgid ""
 "Enter website domain you want to provide images 360 access for. E.g., "
 "example.com"
 msgstr ""
 
-#: .\image360upload\models.py:137
+#: .\image360upload\models.py:144
 msgid "Api key"
 msgstr ""
 
-#: .\image360upload\models.py:140
+#: .\image360upload\models.py:148
 msgid ""
 "Enter API key for image 360 access or live it empty in order the system "
 "generated it automatically"
 msgstr ""
 
-#: .\image360upload\models.py:154
+#: .\image360upload\models.py:165
 msgid "Web sites"
 msgstr ""
 
-#: .\image360upload\templates\admin\image360upload\image360darchive\change_list.html:6
+#: .\image360upload\templates\admin\image360upload\image360archive\change_list.html:6
 msgid "Import archives"
 msgstr ""
 

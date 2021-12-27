@@ -67,10 +67,17 @@ class MyFileStorage(FileSystemStorage):
             for archive_object in archive_objects:
                 if os.path.basename(name) == os.path.basename(archive_object.archive.name):
                     archive_object.delete()
+
         return name # simply returns the name passed
 
 
 class Image360Archive(models.Model):
+    vendor_code = models.CharField(
+        _('Vendor code'),
+        max_length=255,
+        unique=True,
+        null=True,
+    )
     archive = models.FileField(
         upload_to='3d_models/archives/imported/',
         validators=[validate_file_extension],

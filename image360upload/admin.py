@@ -18,7 +18,7 @@ from urllib.error import URLError
 
 @admin.register(Image360Archive)
 class Model3dArchiveAdmin(admin.ModelAdmin):
-    list_display = ['id', '__str__', 'file_path', 'archive_size']
+    list_display = ['id', '__str__', 'vendor_code', 'file_path', 'archive_size']
     list_display_links = ['__str__']
     actions = ['create_photos_360']
     ordering = ['size']

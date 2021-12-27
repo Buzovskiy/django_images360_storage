@@ -36,6 +36,7 @@ class Command(BaseCommand):
                     # Set the media attribute of the object, but under an other path/filename
                     model_archive = Image360Archive()
                     model_archive.archive.save(file, file_content)
+                    model_archive.vendor_code = os.path.splitext(file)[0]
                     # Save object
                     model_archive.save()
 

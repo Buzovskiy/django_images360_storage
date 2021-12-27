@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 23:14+0200\n"
-"PO-Revision-Date: 2021-12-26 23:14+0200\n"
+"POT-Creation-Date: 2021-12-27 09:23+0200\n"
+"PO-Revision-Date: 2021-12-27 09:25+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\image360upload\admin.py:26 .\image360upload\models.py:96
+#: .\image360upload\admin.py:26 .\image360upload\models.py:95
 msgid "Archive size"
 msgstr "Размер архива"
 
@@ -55,8 +55,8 @@ msgstr "Отправить изображения на выбранные сай
 msgid "Image 360 upload"
 msgstr "Выгрузка изображений 360"
 
-#: .\image360upload\management\commands\create_photos_360.py:72
-#: .\image360upload\management\commands\create_photos_360.py:73
+#: .\image360upload\management\commands\create_photos_360.py:70
+#: .\image360upload\management\commands\create_photos_360.py:71
 msgid "No images found in archive"
 msgstr "В архиве не найдены изображения"
 
@@ -80,24 +80,23 @@ msgstr "Изображение 360"
 msgid "Models 360"
 msgstr "Изображения 360"
 
-#: .\image360upload\models.py:76
-#| msgid "Product vendor code"
+#: .\image360upload\models.py:75
 msgid "Vendor code"
 msgstr "Артикул товара"
 
-#: .\image360upload\models.py:88 .\image360upload\models.py:107
+#: .\image360upload\models.py:87 .\image360upload\models.py:106
 msgid "Archive"
 msgstr "Архив"
 
-#: .\image360upload\models.py:108
+#: .\image360upload\models.py:107
 msgid "Archives"
 msgstr "Архивы"
 
-#: .\image360upload\models.py:138 .\image360upload\models.py:164
+#: .\image360upload\models.py:137 .\image360upload\models.py:163
 msgid "Web site"
 msgstr "Веб сайт"
 
-#: .\image360upload\models.py:141
+#: .\image360upload\models.py:140
 msgid ""
 "Enter website domain you want to provide images 360 access for. E.g., "
 "example.com"
@@ -105,11 +104,11 @@ msgstr ""
 "Введите домен веб-сайта, для которого вы хотите предоставить доступ к "
 "изображениям 360. Например, example.com"
 
-#: .\image360upload\models.py:144
+#: .\image360upload\models.py:143
 msgid "Api key"
 msgstr "Ключ api"
 
-#: .\image360upload\models.py:148
+#: .\image360upload\models.py:147
 msgid ""
 "Enter API key for image 360 access or live it empty in order the system "
 "generated it automatically"
@@ -117,9 +116,18 @@ msgstr ""
 "Введите ключ API для доступа к изображению 360 или оставьте его пустым, "
 "чтобы система сгенерировала его автоматически."
 
-#: .\image360upload\models.py:165
+#: .\image360upload\models.py:164
 msgid "Web sites"
 msgstr "Веб сайты"
+
+#: .\image360upload\models.py:173
+msgid "Specify remote resource url by which images 360 import is performed"
+msgstr "Укажите url удаленного ресурса для отправки изображений 360"
+
+#: .\image360upload\models.py:180
+#| msgid "Send images 360 on chosen websites"
+msgid "Images 360 upload on remote websites"
+msgstr "Отправка изображений 360 на удаленные сайты"
 
 #: .\image360upload\templates\admin\image360upload\image360archive\change_list.html:6
 msgid "Import archives"

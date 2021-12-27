@@ -52,7 +52,6 @@ def post_delete_image360(sender, instance, *args, **kwargs):
         parent = pathlib.Path(instance.iframe.path).parent
         # Remove record
         instance.iframe.delete(save=False)
-        print(parent)
         # Remove parent
         shutil.rmtree(parent)
     except:
@@ -167,7 +166,20 @@ class Website(models.Model):
 
 class RemoteUpdateImages360Url(models.Model):
     website = models.OneToOneField(Website, on_delete=models.CASCADE)
-    url = models.CharField(max_length=255, blank=True, null=True)
+    url = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_('Specify remote resource url by which images 360 import is performed')
+    )
+
+    def __str__(self):
+        return self.url
+
+    class Meta:
+        verbose_name = _('Images 360 upload on remote websites')
+
+
 
 
 

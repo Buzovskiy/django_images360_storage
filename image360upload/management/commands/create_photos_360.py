@@ -42,10 +42,8 @@ class Command(BaseCommand):
             return False
 
         for archive in archives:
-            # Название папки, куда ложим файлы модели 360
-            dir_name = os.path.splitext(os.path.basename(archive.archive.name))[0]
             # Если в базе есть такой же артикул, удаляем запись из базы с файлами.
-            for model360 in Image360.objects.filter(vendor_code=dir_name):
+            for model360 in Image360.objects.filter(vendor_code=archive.vendor_code):
                 model360.delete()
 
             iframe_src = Path(self.path_3d_models / 'Components/template_1/iframe.html')
@@ -53,7 +51,7 @@ class Command(BaseCommand):
                 with ContentFile(fh.read()) as file_content:
                     # Set the media attribute of the object, but under an other path/filename
                     image360 = Image360()
-                    image360.vendor_code = dir_name
+                    image360.vendor_code = archive.vendor_code
                     image360.iframe.save('iframe.html', file_content)
                     # Save object
                     image360.save()

@@ -65,7 +65,9 @@ class Image360Admin(admin.ModelAdmin):
 
     @admin.display(description=_('Image 360'))
     def model360(self, obj):
-        url = self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name)
+        # url = self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name)
+        url = f'{settings.MY_HOST}{settings.MEDIA_URL}{obj.iframe.name}'
+        print(url)
         context = {'url': url}
         content = TemplateResponse(self.my_request, 'admin/image360upload/image360/iframe.html', context)
         return mark_safe(content.render().content.decode("utf-8"))

@@ -141,4 +141,6 @@ LOCALE_PATHS = (
 ROSETTA_MESSAGES_PER_PAGE = 1000
 ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
+CSRF_TRUSTED_ORIGINS = decouple.config('CSRF_TRUSTED_ORIGINS', cast=lambda v: [s.strip() for s in v.split(',')])
+
 # X_FRAME_OPTIONS = 'SAMEORIGIN'

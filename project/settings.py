@@ -143,7 +143,5 @@ ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
 CSRF_TRUSTED_ORIGINS = decouple.config('CSRF_TRUSTED_ORIGINS', cast=lambda v: [s.strip() for s in v.split(',')])
 
-MY_HOST = decouple.config('MY_HOST')
-
 
 # X_FRAME_OPTIONS = 'SAMEORIGIN'

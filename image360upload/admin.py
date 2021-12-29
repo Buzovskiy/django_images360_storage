@@ -66,9 +66,7 @@ class Image360Admin(admin.ModelAdmin):
 
     @admin.display(description=_('Image 360'))
     def model360(self, obj):
-        # url = self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name)
-        url = f'{settings.MY_HOST}{settings.MEDIA_URL}{obj.iframe.name}'
-        print(url)
+        url = self.my_request.build_absolute_uri(settings.MEDIA_URL + obj.iframe.name)
         context = {'url': url}
         content = TemplateResponse(self.my_request, 'admin/image360upload/image360/iframe.html', context)
         return mark_safe(content.render().content.decode("utf-8"))
@@ -96,7 +94,6 @@ class WebsiteAdmin(admin.ModelAdmin):
         websites = queryset.select_related('remoteupdateimages360url')
         for website in websites:
             try:
-                print(website.remoteupdateimages360url.url)
                 urllib.request.urlopen(website.remoteupdateimages360url.url)
             except (ObjectDoesNotExist, URLError) as e:
                 messages.warning(request, mark_safe(f'<b>{website.website}</b>: {e}'))

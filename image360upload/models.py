@@ -10,12 +10,13 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from django.core.files.storage import FileSystemStorage
 from .validators import validate_file_extension
+from django.utils.text import slugify
 
 
 def iframe_upload_to_function(instance, filename):
     """ this function has to return the location to upload the file """
     now = datetime.date.today()
-    return f'3d_models/models/{now:%Y/%m/%d}/{instance.vendor_code}/{filename}'
+    return f'3d_models/models/{now:%Y/%m/%d}/{slugify(instance.vendor_code)}/{filename}'
 
 
 class Image360(models.Model):

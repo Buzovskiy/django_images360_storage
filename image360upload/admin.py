@@ -57,6 +57,7 @@ class Image360Admin(admin.ModelAdmin):
     list_display = ['id', 'vendor_code', 'iframe', 'date']
     list_display_links = ['vendor_code']
     fields = ['vendor_code', 'iframe', 'model360', 'date']
+    search_fields = ['vendor_code']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
